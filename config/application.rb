@@ -33,5 +33,12 @@ module PerfMonitor
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # action mailer settings
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = { 
+      :address => ENV.fetch('APP_MAIL_SMTP_ADDRESS'),
+      :port => ENV.fetch('APP_MAIL_SMTP_PORT') 
+    }
   end
 end

@@ -1,0 +1,13 @@
+Performance test failed for <%= @performance_test.url %>
+
+expected:
+  ttfb: <%= @performance_test.max_ttfb %>
+  tti: <%= @performance_test.max_tti %>
+  ttfp: <%= @performance_test.max_ttfp %>
+  speed_index: <%= @performance_test.max_speed_index %>
+
+actual:
+  ttfb: <%= @performance_test.ttfb %>
+  tti: <%= @performance_test.tti %>
+  ttfp: <%= @performance_test.ttfp %>
+  speed_index: <%= @performance_test.speed_index %>

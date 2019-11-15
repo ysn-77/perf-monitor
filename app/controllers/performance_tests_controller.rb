@@ -1,11 +1,14 @@
 class PerformanceTestsController < ApplicationController
-  rescue_from RailsParam::Param::InvalidParameterError, with: :show_parameter_errors
 
   def create
     performance_test = PerformanceTest.new(performance_test_params)
     performance_test.run_tests
     performance_test.save!
     
+    unless performance_test.passed
+      AdminMailer.with(performance_test_id: performance_test.id ).test_failure_email.deliver_later
+    end
+
     render json:{
       passed: performance_test.passed,
       ttfb: performance_test.ttfb,
@@ -54,7 +57,4 @@ class PerformanceTestsController < ApplicationController
     param! :url, String, required: true, format: PerformanceTest::VALID_URL_REGEX
   end
 
-  def show_parameter_errors(exception)
-    render json:{ error: exception.message }, status: :bad_request
-  end
 end
