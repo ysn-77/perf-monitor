@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_11_224221) do
+ActiveRecord::Schema.define(version: 2019_11_16_104309) do
 
   create_table "performance_tests", force: :cascade do |t|
     t.string "url", limit: 2083, null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2019_11_11_224221) do
     t.integer "ttfp", null: false
     t.boolean "passed", null: false
     t.datetime "created_at", null: false
+    t.bigint "original_test_id"
   end
 
 end

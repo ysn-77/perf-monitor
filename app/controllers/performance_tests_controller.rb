@@ -26,7 +26,7 @@ class PerformanceTestsController < ApplicationController
   end
 
   def latest
-    url = get_url!
+    url = get_url
     performance_test = PerformanceTest
       .where(url: url)
       .order(created_at: :desc)
@@ -40,7 +40,7 @@ class PerformanceTestsController < ApplicationController
 
 
   def performance_test_params
-    get_url!
+    get_url
     param! :max_speed_index, Integer, required: true
     param! :max_ttfb,        Integer, required: true
     param! :max_ttfp,        Integer, required: true
@@ -53,7 +53,7 @@ class PerformanceTestsController < ApplicationController
     [:max_ttfb, :max_tti, :max_speed_index, :max_ttfp, :url]
   end
 
-  def get_url!
+  def get_url
     param! :url, String, required: true, format: PerformanceTest::VALID_URL_REGEX
   end
 

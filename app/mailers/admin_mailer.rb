@@ -1,5 +1,4 @@
 class AdminMailer < ApplicationMailer
-  # default from: 'performance@test.com'
 
   def test_failure_email
     @performance_test = PerformanceTest.find(params[:performance_test_id])

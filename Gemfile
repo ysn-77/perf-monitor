@@ -34,6 +34,9 @@ gem 'sucker_punch'
 # Load enironment variables from .env* files
 gem 'dotenv-rails', groups: [:development, :test]
 
+# Cron job scheduler
+gem 'whenever', require: false
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
