@@ -3,13 +3,13 @@ require 'net/http'
 
 class PerformanceTest < ApplicationRecord
 
-  VALID_URL_REGEX = /\A#{URI::regexp(%w(http https))}\z/
   PAGE_SPEED_URL ='https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url='
 
 
-  validates :url,
-            presence: true, length: { maximum: 1083 }, format: { with: VALID_URL_REGEX }
-  validates_presence_of attribute_names.reject { |attr| attr =~ /\Aid|created_at\z/i }
+  validates_presence_of :max_ttfb, :max_tti, :max_speed_index, :max_ttfp, 
+                        :ttfb, :tti, :speed_index, :ttfp, :passed, :url
+
+  validates :url, length: { maximum: 1083 }, http_url: true
 
   def run_tests
     results = Net::HTTP.get(URI.parse(PAGE_SPEED_URL + encoded_url))

@@ -4,8 +4,14 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+test_1:
+  url: 'http://www.google.com'
+  max_ttfb: 1024
+  max_tti: 1024
+  max_speed_index: 1024
+  max_ttfp: 1024
+  ttfb: 1024
+  tti: 1024
+  speed_index: 1024
+  ttfp: 1024
+  passed: true

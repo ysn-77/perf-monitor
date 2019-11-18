@@ -19,14 +19,14 @@ class PerformanceTestsController < ApplicationController
   end
 
   def list
-    url = get_url!
+    url = param! :url, String, required: true
     performance_tests = PerformanceTest.where(url: url)
     
     render json: performance_tests, status: :ok
   end
 
   def latest
-    url = get_url
+    url = param! :url, String, required: true
     performance_test = PerformanceTest
       .where(url: url)
       .order(created_at: :desc)
@@ -40,21 +40,17 @@ class PerformanceTestsController < ApplicationController
 
 
   def performance_test_params
-    get_url
     param! :max_speed_index, Integer, required: true
     param! :max_ttfb,        Integer, required: true
     param! :max_ttfp,        Integer, required: true
     param! :max_tti,         Integer, required: true
+    param! :url,             String,  required: true
 
     params.permit permitted_performance_test_params
   end
 
   def permitted_performance_test_params
     [:max_ttfb, :max_tti, :max_speed_index, :max_ttfp, :url]
-  end
-
-  def get_url
-    param! :url, String, required: true, format: PerformanceTest::VALID_URL_REGEX
   end
 
 end
